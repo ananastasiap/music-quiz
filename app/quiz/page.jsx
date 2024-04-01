@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { quiz } from "../composerData";
+import Link from "next/link";
 
 const Page = () => {
   const [activeQuestion, setActiveQuestion] = useState(0);
@@ -30,7 +31,29 @@ const Page = () => {
     }
   };
 
-  const nextQuestion = () => {};
+  const nextQuestion = () => {
+    setSelectedAnswerIndex(null);
+    setResult((prev) =>
+      selectedAnswer
+        ? {
+            ...prev,
+            score: prev.score + 1,
+            correctAnswers: prev.correctAnswers + 1,
+          }
+        : {
+            ...prev,
+            wrongAnswers: prev.wrongAnswers + 1,
+          }
+    );
+
+    if (activeQuestion !== questions.length - 1) {
+      setActiveQuestion((prev) => prev + 1);
+    } else {
+      setActiveQuestion(0);
+      setShowResult(true);
+    }
+    setChecked(false);
+  };
 
   return (
     <div className="container">
@@ -71,7 +94,13 @@ const Page = () => {
             )}
           </div>
         ) : (
-          <div className="quiz-container"></div>
+          <div className="quiz-container">
+            <h3>Баллы</h3>
+            <h3>
+              {result.score} из {questions.length}
+            </h3>
+            <Link href="../page.js">Выход</Link>
+          </div>
         )}
       </div>
     </div>
