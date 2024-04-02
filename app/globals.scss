@@ -7,7 +7,18 @@
 html,
 body {
   overflow-x: hidden;
-  background-color: #000925;
+}
+
+body {
+  padding: 20px 30px;
+}
+
+a {
+  text-decoration: none;
+  color: #000105;
+}
+li {
+  list-style-type: none;
 }
 
 main {
@@ -16,7 +27,7 @@ main {
 
 h1,
 h2 {
-  color: #eee;
+  color: #000105;
 }
 
 h3 {
@@ -40,14 +51,13 @@ button {
   background-color: lightgray;
 }
 
-li {
-  list-style-type: none;
-  cursor: pointer;
-  margin: 9px 0;
-  padding: 16px 8px;
-  color: #000105;
-  border: 1px solid lightgray;
-}
+// li {
+//   cursor: pointer;
+//   margin: 9px 0;
+//   padding: 16px 8px;
+//   color: #000105;
+//   border: 1px solid lightgray;
+// }
 
 .li-hover:hover {
   background-color: #d8d8d8;
