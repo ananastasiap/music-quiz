@@ -1,10 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { quiz } from "../composerData";
+// import { quiz } from "../composerData";
 import Link from "next/link";
 
-const Page = () => {
+const Page = ({ data }) => {
   const [activeQuestion, setActiveQuestion] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState("");
   const [checked, setChecked] = useState(false);
@@ -16,7 +16,7 @@ const Page = () => {
     wrongAnswers: 0,
   });
 
-  const { questions } = quiz;
+  const { questions } = data;
   const { question, answers, correctAnswer } = questions[activeQuestion];
 
   const handleAnswerSelected = (answer, idx) => {
@@ -57,7 +57,7 @@ const Page = () => {
 
   return (
     <div className="container">
-      <h1>Композитор</h1>
+      <h1>{data.title}</h1>
       <div>
         <h2>
           Вопрос: {activeQuestion + 1}

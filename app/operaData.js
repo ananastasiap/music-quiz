@@ -1,10 +1,10 @@
-export const quiz = {
+export const quiz1 = {
   totalQuestions: 18,
-  title: "Композитор",
+  title: "Опера",
   questions: [
     {
       id: 1,
-      question: "М.И. Глинка родился в селе Новоспасском в",
+      question: "М.И.",
       answers: ["20 мая 1809 года", "20 мая 1804 года", "20 мая 1806 года"],
       correctAnswer: "20 мая 1804 года",
     },
