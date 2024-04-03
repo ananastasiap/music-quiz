@@ -4,6 +4,8 @@ import { quiz1 as Opera } from "@/app/operaData";
 import Page from "@/app/quiz/page";
 import { useState } from "react";
 
+import styles from "./StartMenu.module.scss";
+
 const StartMenu = () => {
   const [selectedQuiz, setSelectedQuiz] = useState(null);
 
@@ -12,7 +14,7 @@ const StartMenu = () => {
   };
 
   return (
-    <main>
+    <main className={styles.main}>
       <div className="container">
         {selectedQuiz === "composer" ? (
           <Page data={Composer} />
