@@ -15,14 +15,13 @@ const StartMenu = () => {
 
   return (
     <main className={styles.main}>
-      <div className="container">
+      <div className={styles.container}>
         {selectedQuiz === "composer" ? (
           <Page data={Composer} />
         ) : selectedQuiz === "opera" ? (
           <Page data={Opera} />
         ) : (
           <div>
-            <h1>Выберите квиз</h1>
             <button onClick={() => handleQuizSelect("composer")}>
               Композитор
             </button>

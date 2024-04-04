@@ -1,6 +1,13 @@
 .main {
-  margin: auto;
-  max-width: 50%;
-  border: 1px solid #000;
-  border-radius: 10px;
+  width: 95vw;
+  height: 85vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .container {
+    padding: 40px 200px;
+    border: 1px solid #000;
+    border-radius: 10px;
+  }
 }

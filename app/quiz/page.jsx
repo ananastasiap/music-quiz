@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
-// import { quiz } from "../composerData";
 import Link from "next/link";
+
+import "./page.scss";
 
 const Page = ({ data }) => {
   const [activeQuestion, setActiveQuestion] = useState(0);
@@ -76,7 +77,7 @@ const Page = ({ data }) => {
                   selectedAnswerIndex === idx ? "li-selected" : "li-hover"
                 }
               >
-                <span>{answer}</span>
+                <span className="answer">{`· ${answer}`}</span>
               </li>
             ))}
             {checked ? (
