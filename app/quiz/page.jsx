@@ -7,7 +7,6 @@ import "./page.scss";
 
 const Page = ({ data }) => {
   const [activeQuestion, setActiveQuestion] = useState(0);
-  const [selectedAnswer, setSelectedAnswer] = useState("");
   const [checked, setChecked] = useState(false);
   const [selectedAnswerIndex, setSelectedAnswerIndex] = useState(null);
   const [showResult, setShowResult] = useState(false);
@@ -16,26 +15,31 @@ const Page = ({ data }) => {
     correctAnswers: 0,
     wrongAnswers: 0,
   });
+  const [isAnswerCorrect, setIsAnswerCorrect] = useState(null);
+  const [answerSubmitted, setAnswerSubmitted] = useState(false);
 
   const { questions } = data;
   const { question, answers, correctAnswer } = questions[activeQuestion];
 
   const handleAnswerSelected = (answer, idx) => {
+    if (showResult || answerSubmitted) {
+      return;
+    }
+
     setChecked(true);
     setSelectedAnswerIndex(idx);
-    if (answer === correctAnswer) {
-      setSelectedAnswer(true);
-      console.log("true");
-    } else {
-      setSelectedAnswer(false);
-      console.log("false");
-    }
+    setIsAnswerCorrect(answer === correctAnswer);
+    setAnswerSubmitted(true);
   };
 
   const nextQuestion = () => {
+    if (!answerSubmitted) {
+      return;
+    }
+
     setSelectedAnswerIndex(null);
     setResult((prev) =>
-      selectedAnswer
+      isAnswerCorrect
         ? {
             ...prev,
             score: prev.score + 1,
@@ -54,6 +58,8 @@ const Page = ({ data }) => {
       setShowResult(true);
     }
     setChecked(false);
+    setIsAnswerCorrect(null);
+    setAnswerSubmitted(false);
   };
 
   return (
@@ -74,21 +80,32 @@ const Page = ({ data }) => {
                 key={idx}
                 onClick={() => handleAnswerSelected(answer, idx)}
                 className={
-                  selectedAnswerIndex === idx ? "li-selected" : "li-hover"
+                  selectedAnswerIndex === idx
+                    ? isAnswerCorrect === null
+                      ? "li-selected"
+                      : isAnswerCorrect
+                      ? "li-correct"
+                      : "li-incorrect"
+                    : "li-hover"
                 }
               >
                 <span className="answer">{`· ${answer}`}</span>
               </li>
             ))}
             {checked ? (
-              <button onClick={nextQuestion} className="btn">
-                {activeQuestion === question.length - 1
+              <button
+                onClick={nextQuestion}
+                className={`btn ${
+                  isAnswerCorrect ? "btn-correct" : "btn-incorrect"
+                }`}
+              >
+                {activeQuestion === questions.length - 1
                   ? "Заканчиваем"
                   : "Дальше"}
               </button>
             ) : (
               <button onClick={nextQuestion} disabled className="btn-disabled">
-                {activeQuestion === question.length - 1
+                {activeQuestion === questions.length - 1
                   ? "Заканчиваем"
                   : "Дальше"}
               </button>
