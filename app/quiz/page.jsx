@@ -15,7 +15,7 @@ const Page = ({ data }) => {
   const [isAnswerCorrect, setIsAnswerCorrect] = useState(null);
 
   const { questions } = data;
-  const { question, answers, correctAnswer } = questions[activeQuestion];
+  const { answers, correctAnswer } = questions[activeQuestion];
 
   const handleAnswerSelected = (answerIndex) => {
     if (showResult || selectedAnswerIndexes.includes(answerIndex)) {
@@ -24,7 +24,6 @@ const Page = ({ data }) => {
 
     const newSelectedAnswerIndexes = [...selectedAnswerIndexes, answerIndex];
 
-    // Check if the selected answers are correct
     const selectedAnswers = newSelectedAnswerIndexes.map(
       (index) => answers[index]
     );
