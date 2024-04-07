@@ -4,6 +4,10 @@ import { useState } from "react";
 import "./page.scss";
 
 const Page = ({ data }) => {
+  if (!data || !data.questions) {
+    console.error("Data or questions array is undefined!");
+    return null;
+  }
   const [activeQuestion, setActiveQuestion] = useState(0);
   const [selectedAnswerIndexes, setSelectedAnswerIndexes] = useState([]);
   const [showResult, setShowResult] = useState(false);
