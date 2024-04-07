@@ -1,5 +1,3 @@
-"use client";
-
 import { useState } from "react";
 import Link from "next/link";
 
@@ -7,8 +5,7 @@ import "./page.scss";
 
 const Page = ({ data }) => {
   const [activeQuestion, setActiveQuestion] = useState(0);
-  const [checked, setChecked] = useState(false);
-  const [selectedAnswerIndex, setSelectedAnswerIndex] = useState(null);
+  const [selectedAnswerIndexes, setSelectedAnswerIndexes] = useState([]);
   const [showResult, setShowResult] = useState(false);
   const [result, setResult] = useState({
     score: 0,
@@ -16,50 +13,50 @@ const Page = ({ data }) => {
     wrongAnswers: 0,
   });
   const [isAnswerCorrect, setIsAnswerCorrect] = useState(null);
-  const [answerSubmitted, setAnswerSubmitted] = useState(false);
 
   const { questions } = data;
   const { question, answers, correctAnswer } = questions[activeQuestion];
 
-  const handleAnswerSelected = (answer, idx) => {
-    if (showResult || answerSubmitted) {
+  const handleAnswerSelected = (answerIndex) => {
+    if (showResult || selectedAnswerIndexes.includes(answerIndex)) {
       return;
     }
 
-    setChecked(true);
-    setSelectedAnswerIndex(idx);
-    setIsAnswerCorrect(answer === correctAnswer);
-    setAnswerSubmitted(true);
+    const newSelectedAnswerIndexes = [...selectedAnswerIndexes, answerIndex];
+
+    // Check if the selected answers are correct
+    const selectedAnswers = newSelectedAnswerIndexes.map(
+      (index) => answers[index]
+    );
+    const isAnswerCorrect = selectedAnswers.every((answer) =>
+      correctAnswer.includes(answer)
+    );
+
+    setSelectedAnswerIndexes(newSelectedAnswerIndexes);
+    setIsAnswerCorrect(isAnswerCorrect);
   };
 
   const nextQuestion = () => {
-    if (!answerSubmitted) {
-      return;
-    }
-
-    setSelectedAnswerIndex(null);
-    setResult((prev) =>
-      isAnswerCorrect
-        ? {
-            ...prev,
-            score: prev.score + 1,
-            correctAnswers: prev.correctAnswers + 1,
-          }
-        : {
-            ...prev,
-            wrongAnswers: prev.wrongAnswers + 1,
-          }
+    const allSelectedAnswersCorrect = selectedAnswerIndexes.every((index) =>
+      correctAnswer.includes(answers[index])
     );
+
+    setResult((prevResult) => ({
+      ...prevResult,
+      score: prevResult.score + (allSelectedAnswersCorrect ? 1 : 0),
+      correctAnswers:
+        prevResult.correctAnswers + (allSelectedAnswersCorrect ? 1 : 0),
+      wrongAnswers:
+        prevResult.wrongAnswers + (allSelectedAnswersCorrect ? 0 : 1),
+    }));
 
     if (activeQuestion !== questions.length - 1) {
       setActiveQuestion((prev) => prev + 1);
     } else {
-      setActiveQuestion(0);
       setShowResult(true);
     }
-    setChecked(false);
+    setSelectedAnswerIndexes([]);
     setIsAnswerCorrect(null);
-    setAnswerSubmitted(false);
   };
 
   return (
@@ -78,33 +75,28 @@ const Page = ({ data }) => {
             {answers.map((answer, idx) => (
               <li
                 key={idx}
-                onClick={() => handleAnswerSelected(answer, idx)}
-                className={
-                  selectedAnswerIndex === idx
+                onClick={() => handleAnswerSelected(idx)}
+                className={`${
+                  selectedAnswerIndexes.includes(idx)
                     ? isAnswerCorrect === null
                       ? "li-selected"
                       : isAnswerCorrect
                       ? "li-correct"
                       : "li-incorrect"
                     : "li-hover"
-                }
+                }`}
               >
                 <span className="answer">{`· ${answer}`}</span>
               </li>
             ))}
-            {checked ? (
-              <button
-                onClick={nextQuestion}
-                className={`btn ${
-                  isAnswerCorrect ? "btn-correct" : "btn-incorrect"
-                }`}
-              >
+            {selectedAnswerIndexes.length > 0 ? (
+              <button onClick={nextQuestion} className="btn btn-next">
                 {activeQuestion === questions.length - 1
                   ? "Заканчиваем"
                   : "Дальше"}
               </button>
             ) : (
-              <button onClick={nextQuestion} disabled className="btn-disabled">
+              <button disabled className="btn-disabled btn-next">
                 {activeQuestion === questions.length - 1
                   ? "Заканчиваем"
                   : "Дальше"}
