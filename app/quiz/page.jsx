@@ -58,6 +58,10 @@ const Page = ({ data }) => {
     setIsAnswerCorrect(null);
   };
 
+  const handleExit = () => {
+    window.location.reload();
+  };
+
   return (
     <div className="container">
       <h1>{data.title}</h1>
@@ -108,7 +112,7 @@ const Page = ({ data }) => {
             <h3>
               {result.score} из {questions.length}
             </h3>
-            <Link href="../page.js">Выход</Link>
+            <button onClick={handleExit}>Выход</button>
           </div>
         )}
       </div>

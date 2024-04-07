@@ -9,10 +9,10 @@ const Header = () => {
       </a>
       <ul className={styles.menu}>
         <li className={styles.menu__item}>
-          <Link href="/app/quiz/">Все вопросы</Link>
+          <Link href="../../allQuestions/">Все вопросы</Link>
         </li>
         <li className={styles.menu__item}>
-          <Link href="/app/quiz/">О проекте</Link>
+          <Link href="../../about/">О проекте</Link>
         </li>
       </ul>
     </header>
