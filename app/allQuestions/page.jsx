@@ -1,3 +1,5 @@
+"use client";
+
 import { Fragment } from "react";
 import Header from "../components/Header";
 import { quiz } from "../composerData";
