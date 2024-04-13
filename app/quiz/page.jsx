@@ -1,3 +1,4 @@
+"use client";
 import { useState } from "react";
 import "./page.scss";
 
@@ -17,14 +18,13 @@ const Page = ({ data }) => {
   const [isAnswerCorrect, setIsAnswerCorrect] = useState(null);
   const [showCheckButton, setShowCheckButton] = useState(true);
   const [answerFeedback, setAnswerFeedback] = useState([]);
-  const [isAnswerChecked, setIsAnswerChecked] = useState(false); // Новое состояние
+  const [isAnswerChecked, setIsAnswerChecked] = useState(false);
 
   const { questions } = data;
   const { answers, correctAnswer } = questions[activeQuestion];
 
   const handleAnswerSelected = (answerIndex) => {
     if (showResult || isAnswerChecked) {
-      // Игнорируем выбор ответов после нажатия кнопки "проверить"
       return;
     }
 
@@ -61,13 +61,13 @@ const Page = ({ data }) => {
     }));
 
     setShowCheckButton(false);
-    setIsAnswerChecked(true); // Устанавливаем флаг, что была нажата кнопка "проверить"
+    setIsAnswerChecked(true);
   };
 
   const nextQuestion = () => {
     if (!showResult) {
       setShowCheckButton(true);
-      setIsAnswerChecked(false); // Сбрасываем флаг после перехода к следующему вопросу
+      setIsAnswerChecked(false);
     }
     if (activeQuestion !== questions.length - 1) {
       setActiveQuestion((prev) => prev + 1);
