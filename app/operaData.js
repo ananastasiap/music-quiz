@@ -1,6 +1,6 @@
 export const quiz1 = {
   totalQuestions: 11,
-  title: "Опера",
+  title: "Опера «Иван Сусанин»",
   questions: [
     {
       id: 1,
