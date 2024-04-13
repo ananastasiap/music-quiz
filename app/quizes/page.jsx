@@ -1,7 +1,7 @@
 "use client";
-import { quiz as Composer } from "../composerData";
-import { quiz1 as Opera1 } from "../operaData";
-import { quiz2 as Opera2 } from "../opera2Data";
+import { quiz as Composer } from "../composerData.js";
+import { quiz1 as Opera1 } from "../operaData.js";
+import { quiz2 as Opera2 } from "../opera2Data.js";
 import Page from "../quiz/page.jsx";
 import Header from "../components/Header";
 import { Fragment, useState } from "react";
