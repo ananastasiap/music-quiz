@@ -1,0 +1,14 @@
+.main {
+  width: 95vw;
+  height: 85vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .container {
+    padding: 40px 100px;
+    border: 5px solid #e35b00;
+    border-radius: 10px;
+    background-color: #fff;
+  }
+}

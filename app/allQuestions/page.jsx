@@ -4,6 +4,7 @@ import { Fragment } from "react";
 import Header from "../components/Header";
 import { quiz } from "../composerData";
 import { quiz1 } from "../operaData";
+import { quiz2 } from "../opera2Data";
 
 const Page = () => {
   return (
@@ -23,6 +24,14 @@ const Page = () => {
           <h3>{quiz1.title}</h3>
           <div>
             {quiz1.questions.map((question) => (
+              <p key={question.id}>{question.question}</p>
+            ))}
+          </div>
+        </section>
+        <section>
+          <h3>{quiz2.title}</h3>
+          <div>
+            {quiz2.questions.map((question) => (
               <p key={question.id}>{question.question}</p>
             ))}
           </div>

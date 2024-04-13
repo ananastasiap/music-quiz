@@ -11,6 +11,12 @@ const Header = () => {
       </a>
       <ul className={styles.menu}>
         <li className={styles.menu__item}>
+          <Link href="../../allQuestions/">Тесты</Link>
+        </li>
+        <li className={styles.menu__item}>
+          <Link href="../../allQuestions/">Игры</Link>
+        </li>
+        <li className={styles.menu__item}>
           <Link href="../../allQuestions/">Все вопросы</Link>
         </li>
         <li className={styles.menu__item}>

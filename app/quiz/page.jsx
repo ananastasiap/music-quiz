@@ -1,5 +1,3 @@
-"use client";
-
 import { useState } from "react";
 import "./page.scss";
 
@@ -17,42 +15,60 @@ const Page = ({ data }) => {
     wrongAnswers: 0,
   });
   const [isAnswerCorrect, setIsAnswerCorrect] = useState(null);
+  const [showCheckButton, setShowCheckButton] = useState(true);
+  const [answerFeedback, setAnswerFeedback] = useState([]);
+  const [isAnswerChecked, setIsAnswerChecked] = useState(false); // Новое состояние
 
   const { questions } = data;
   const { answers, correctAnswer } = questions[activeQuestion];
 
   const handleAnswerSelected = (answerIndex) => {
-    if (showResult || selectedAnswerIndexes.includes(answerIndex)) {
+    if (showResult || isAnswerChecked) {
+      // Игнорируем выбор ответов после нажатия кнопки "проверить"
       return;
     }
 
     const newSelectedAnswerIndexes = [...selectedAnswerIndexes, answerIndex];
 
-    const selectedAnswers = newSelectedAnswerIndexes.map(
-      (index) => answers[index]
-    );
-    const isAnswerCorrect = selectedAnswers.every((answer) =>
-      correctAnswer.includes(answer)
-    );
-
     setSelectedAnswerIndexes(newSelectedAnswerIndexes);
-    setIsAnswerCorrect(isAnswerCorrect);
+    setIsAnswerCorrect(null);
   };
 
-  const nextQuestion = () => {
-    const allSelectedAnswersCorrect = selectedAnswerIndexes.every((index) =>
+  const checkAnswers = () => {
+    const answerFeedback = answers.map((answer, idx) => {
+      const isCorrect = correctAnswer.includes(answer);
+      return {
+        index: idx,
+        isCorrect: isCorrect,
+      };
+    });
+
+    setAnswerFeedback(answerFeedback);
+
+    const selectedCorrectIndexes = selectedAnswerIndexes.filter((index) =>
       correctAnswer.includes(answers[index])
     );
 
     setResult((prevResult) => ({
       ...prevResult,
-      score: prevResult.score + (allSelectedAnswersCorrect ? 1 : 0),
-      correctAnswers:
-        prevResult.correctAnswers + (allSelectedAnswersCorrect ? 1 : 0),
+      score: prevResult.score + selectedCorrectIndexes.length,
+      correctAnswers: prevResult.correctAnswers + selectedCorrectIndexes.length,
       wrongAnswers:
-        prevResult.wrongAnswers + (allSelectedAnswersCorrect ? 0 : 1),
+        prevResult.wrongAnswers +
+        (selectedCorrectIndexes.length === selectedAnswerIndexes.length
+          ? 0
+          : 1),
     }));
 
+    setShowCheckButton(false);
+    setIsAnswerChecked(true); // Устанавливаем флаг, что была нажата кнопка "проверить"
+  };
+
+  const nextQuestion = () => {
+    if (!showResult) {
+      setShowCheckButton(true);
+      setIsAnswerChecked(false); // Сбрасываем флаг после перехода к следующему вопросу
+    }
     if (activeQuestion !== questions.length - 1) {
       setActiveQuestion((prev) => prev + 1);
     } else {
@@ -60,6 +76,7 @@ const Page = ({ data }) => {
     }
     setSelectedAnswerIndexes([]);
     setIsAnswerCorrect(null);
+    setAnswerFeedback([]);
   };
 
   const handleExit = () => {
@@ -85,25 +102,25 @@ const Page = ({ data }) => {
                 onClick={() => handleAnswerSelected(idx)}
                 className={`${
                   selectedAnswerIndexes.includes(idx)
-                    ? isAnswerCorrect === null
-                      ? "li-selected"
-                      : isAnswerCorrect
-                      ? "li-correct"
-                      : "li-incorrect"
+                    ? "li-selected"
                     : "li-hover"
+                } ${
+                  answerFeedback[idx]?.isCorrect
+                    ? "li-correct"
+                    : answerFeedback[idx]?.isCorrect === false
+                    ? "li-incorrect"
+                    : ""
                 }`}
               >
                 <span className="answer">{`· ${answer}`}</span>
               </li>
             ))}
-            {selectedAnswerIndexes.length > 0 ? (
-              <button onClick={nextQuestion} className="btn btn-next">
-                {activeQuestion === questions.length - 1
-                  ? "Заканчиваем"
-                  : "Дальше"}
+            {showCheckButton ? (
+              <button onClick={checkAnswers} className="btn btn-next">
+                Проверить
               </button>
             ) : (
-              <button disabled className="btn-disabled btn-next">
+              <button onClick={nextQuestion} className="btn btn-next">
                 {activeQuestion === questions.length - 1
                   ? "Заканчиваем"
                   : "Дальше"}
@@ -114,7 +131,8 @@ const Page = ({ data }) => {
           <div className="quiz-container">
             <h3>Баллы</h3>
             <h3>
-              {result.score} из {questions.length}
+              {result.score} из{" "}
+              {questions.length * questions[0].correctAnswer.length}
             </h3>
             <button onClick={handleExit}>Выход</button>
           </div>
