@@ -11,10 +11,10 @@ const Header = () => {
       </a>
       <ul className={styles.menu}>
         <li className={styles.menu__item}>
-          <Link href="../../allQuestions/">Тесты</Link>
+          <Link href="../../quizes/">Тесты</Link>
         </li>
         <li className={styles.menu__item}>
-          <Link href="../../allQuestions/">Игры</Link>
+          <Link href="../../games/">Игры</Link>
         </li>
         <li className={styles.menu__item}>
           <Link href="../../allQuestions/">Все вопросы</Link>
