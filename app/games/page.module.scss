@@ -1,0 +1,36 @@
+.main {
+  width: 95vw;
+  height: 85vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .container {
+    padding: 40px 100px;
+    border: 5px solid #e35b00;
+    border-radius: 10px;
+    background-color: #fff;
+
+    .btnGame {
+      display: inline-block;
+      padding: 8px 16px;
+      width: 100%;
+      font-family: "Caveat", cursive;
+      font-size: 2rem;
+      color: #000105;
+      background-color: #f29559;
+      border: 2px solid #f29559;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.5s ease-in-out;
+
+      &:first-child {
+        margin-bottom: 10px;
+      }
+
+      &:hover {
+        background-color: #fff;
+      }
+    }
+  }
+}
