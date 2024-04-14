@@ -4,7 +4,7 @@ export const quiz1 = {
   questions: [
     {
       id: 1,
-      question: "Опера в переводе",
+      question: "«Опера» в переводе",
       answers: [
         "Согласие, созвучие",
         "Ряд, последовательность",
