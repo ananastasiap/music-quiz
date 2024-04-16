@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { musicSing1 } from "../musicSingData.js";
+import { musicDance1 } from "../musicDanceData.js";
 import styles from "./page.module.scss";
 
 const Game1 = () => {
@@ -246,10 +247,57 @@ const Game1 = () => {
         </table>
         {correctPair && <p className={styles.right}>Правильно!</p>}
         {wrongPair && <p className={styles.wrong}>Неправильно!</p>}
+      </div>
 
-        <h2>Кто поёт?</h2>
+      <div className={styles.container}>
+        <h2 className={styles.titleSection}>Кто поёт?</h2>
         <div className={styles.quizContainer}>
           {musicSing1.questions.map((question) => (
+            <div key={question.id} className={styles.questionContainer}>
+              <audio
+                controls
+                src={question.audio_file}
+                className={styles.audio}
+              />
+              <div className={styles.imageContainer}>
+                {question.images.map((image, index) => (
+                  <div
+                    key={index}
+                    className={`${styles.image} ${
+                      selectedAnswers[question.id] === image && styles.selected
+                    } ${
+                      showResults &&
+                      image === question.correctAnswer &&
+                      styles.correct
+                    } ${
+                      showResults &&
+                      image !== question.correctAnswer &&
+                      selectedAnswers[question.id] === image &&
+                      styles.incorrect
+                    }`}
+                    onClick={() => handleAnswerClick(question.id, image)}
+                  >
+                    <img src={image} alt={`Option ${index + 1}`} />
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+        <button onClick={showResult} className={styles.showResultButton}>
+          Ответы
+        </button>
+        {showResults && (
+          <div className={styles.results}>
+            <h2>
+              Молодцы! Вы заработали {calculateResults()} из{" "}
+              {musicSing1.questions.length}. Идём дальше!
+            </h2>
+          </div>
+        )}
+        <h2 className={styles.titleSection}>Какой танец?</h2>
+        <div className={styles.quizContainer}>
+          {musicDance1.questions.map((question) => (
             <div key={question.id} className={styles.questionContainer}>
               <audio controls src={question.audio_file} />
               <div className={styles.imageContainer}>
@@ -283,13 +331,13 @@ const Game1 = () => {
         {showResults && (
           <div className={styles.results}>
             <h2>
-              Молодцы! Вы заработали {calculateResults()} из{" "}
-              {musicSing1.questions.length}.
+              Молодцы! {calculateResults()} из {musicSing1.questions.length}.
             </h2>
-            <Link href="../games/">Выйти</Link>
           </div>
         )}
       </div>
+
+      <Link href="../games/">Выйти</Link>
     </main>
   );
 };

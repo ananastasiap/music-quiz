@@ -7,6 +7,10 @@
   font-family: "Caveat", cursive;
 
   .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     padding: 40px 20px;
     border-radius: 10px;
     background-color: #fff;
@@ -61,11 +65,23 @@
   padding: 10px 15px;
 }
 
+.container:last-child {
+  margin-top: 10vh;
+}
+
 .quizContainer {
   max-width: 70vw;
 
   .questionContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     max-width: 100%;
+
+    .audio {
+      margin-top: 5vh;
+    }
 
     .imageContainer {
       display: flex;
@@ -73,9 +89,10 @@
       justify-content: center;
       align-items: center;
       gap: 10px;
+      margin-top: 3vh;
 
       .image {
-        max-width: 30%;
+        max-width: 33%;
 
         img {
           width: 100%;
@@ -90,4 +107,9 @@
       background-color: red;
     }
   }
+}
+
+.titleSection {
+  margin-top: 5vh;
+  font-size: 2rem;
 }
