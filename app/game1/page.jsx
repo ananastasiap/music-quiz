@@ -249,7 +249,7 @@ const Game1 = () => {
         {wrongPair && <p className={styles.wrong}>Неправильно!</p>}
       </div>
 
-      <div className={styles.container}>
+      <div className={`${styles.container} ${styles.containerQuiz}`}>
         <h2 className={styles.titleSection}>Кто поёт?</h2>
         <div className={styles.quizContainer}>
           {musicSing1.questions.map((question) => (
@@ -277,7 +277,11 @@ const Game1 = () => {
                     }`}
                     onClick={() => handleAnswerClick(question.id, image)}
                   >
-                    <img src={image} alt={`Option ${index + 1}`} />
+                    <img
+                      src={image}
+                      alt={`Option ${index + 1}`}
+                      loading="lazy"
+                    />
                   </div>
                 ))}
               </div>
@@ -299,7 +303,11 @@ const Game1 = () => {
         <div className={styles.quizContainer}>
           {musicDance1.questions.map((question) => (
             <div key={question.id} className={styles.questionContainer}>
-              <audio controls src={question.audio_file} />
+              <audio
+                controls
+                src={question.audio_file}
+                className={styles.audio}
+              />
               <div className={styles.imageContainer}>
                 {question.images.map((image, index) => (
                   <div
@@ -318,7 +326,11 @@ const Game1 = () => {
                     }`}
                     onClick={() => handleAnswerClick(question.id, image)}
                   >
-                    <img src={image} alt={`Option ${index + 1}`} />
+                    <img
+                      src={image}
+                      alt={`Option ${index + 1}`}
+                      loading="lazy"
+                    />
                   </div>
                 ))}
               </div>
@@ -336,8 +348,9 @@ const Game1 = () => {
           </div>
         )}
       </div>
-
-      <Link href="../games/">Выйти</Link>
+      <Link href="../games/" className={styles.exit}>
+        Выйти
+      </Link>
     </main>
   );
 };

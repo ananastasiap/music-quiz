@@ -65,7 +65,7 @@
   padding: 10px 15px;
 }
 
-.container:last-child {
+.containerQuiz {
   margin-top: 10vh;
 }
 
@@ -112,4 +112,18 @@
 .titleSection {
   margin-top: 5vh;
   font-size: 2rem;
+}
+
+.showResultButton {
+  padding: 8px 8px;
+  width: 30%;
+}
+
+.exit {
+  margin-top: 5vh;
+  border: 2px solid #fff;
+  padding: 5px;
+  color: #fff;
+  font-size: 2rem;
+  border-radius: 5px;
 }
