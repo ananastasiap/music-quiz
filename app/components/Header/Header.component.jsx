@@ -17,9 +17,6 @@ const Header = () => {
           <Link href="../../games/">Игры</Link>
         </li>
         <li className={styles.menu__item}>
-          <Link href="../../allQuestions/">Все вопросы</Link>
-        </li>
-        <li className={styles.menu__item}>
           <Link href="../../about/">О проекте</Link>
         </li>
       </ul>

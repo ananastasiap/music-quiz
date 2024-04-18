@@ -111,22 +111,35 @@ const Game1 = () => {
     }
   }, [selectedCells]);
 
-  const [selectedAnswers, setSelectedAnswers] = useState({});
   const [showResults, setShowResults] = useState(false);
+  const [selectedAnswersSing, setSelectedAnswersSing] = useState({});
+  const [selectedAnswersDance, setSelectedAnswersDance] = useState({});
 
   const allQuestions = [...musicSing1.questions, ...musicDance1.questions];
 
-  const handleAnswerClick = (questionId, selectedOption) => {
-    setSelectedAnswers((prev) => ({
-      ...prev,
-      [questionId]: selectedOption,
-    }));
+  const handleAnswerClick = (section, questionId, selectedOption) => {
+    if (section === "sing") {
+      setSelectedAnswersSing((prev) => ({
+        ...prev,
+        [questionId]: selectedOption,
+      }));
+    } else if (section === "dance") {
+      setSelectedAnswersDance((prev) => ({
+        ...prev,
+        [questionId]: selectedOption,
+      }));
+    }
   };
 
   const calculateResults = () => {
     let correctCount = 0;
     allQuestions.forEach((question) => {
-      if (selectedAnswers[question.id] === question.correctAnswer) {
+      if (
+        (selectedAnswersSing[question.id] === question.correctAnswer &&
+          musicSing1.questions.some((q) => q.id === question.id)) ||
+        (selectedAnswersDance[question.id] === question.correctAnswer &&
+          musicDance1.questions.some((q) => q.id === question.id))
+      ) {
         correctCount++;
       }
     });
@@ -266,7 +279,8 @@ const Game1 = () => {
                   <div
                     key={index}
                     className={`${styles.image} ${
-                      selectedAnswers[question.id] === image && styles.selected
+                      selectedAnswersSing[question.id] === image &&
+                      styles.selected
                     } ${
                       showResults &&
                       image === question.correctAnswer &&
@@ -274,10 +288,12 @@ const Game1 = () => {
                     } ${
                       showResults &&
                       image !== question.correctAnswer &&
-                      selectedAnswers[question.id] === image &&
+                      selectedAnswersSing[question.id] === image &&
                       styles.incorrect
                     }`}
-                    onClick={() => handleAnswerClick(question.id, image)}
+                    onClick={() =>
+                      handleAnswerClick("sing", question.id, image)
+                    }
                   >
                     <img
                       src={image}
@@ -304,7 +320,8 @@ const Game1 = () => {
                   <div
                     key={index}
                     className={`${styles.image} ${
-                      selectedAnswers[question.id] === image && styles.selected
+                      selectedAnswersDance[question.id] === image &&
+                      styles.selected
                     } ${
                       showResults &&
                       image === question.correctAnswer &&
@@ -312,10 +329,12 @@ const Game1 = () => {
                     } ${
                       showResults &&
                       image !== question.correctAnswer &&
-                      selectedAnswers[question.id] === image &&
+                      selectedAnswersDance[question.id] === image &&
                       styles.incorrect
                     }`}
-                    onClick={() => handleAnswerClick(question.id, image)}
+                    onClick={() =>
+                      handleAnswerClick("dance", question.id, image)
+                    }
                   >
                     <img
                       src={image}
