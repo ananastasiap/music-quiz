@@ -114,6 +114,8 @@ const Game1 = () => {
   const [selectedAnswers, setSelectedAnswers] = useState({});
   const [showResults, setShowResults] = useState(false);
 
+  const allQuestions = [...musicSing1.questions, ...musicDance1.questions];
+
   const handleAnswerClick = (questionId, selectedOption) => {
     setSelectedAnswers((prev) => ({
       ...prev,
@@ -123,7 +125,7 @@ const Game1 = () => {
 
   const calculateResults = () => {
     let correctCount = 0;
-    musicSing1.questions.forEach((question) => {
+    allQuestions.forEach((question) => {
       if (selectedAnswers[question.id] === question.correctAnswer) {
         correctCount++;
       }
@@ -288,7 +290,7 @@ const Game1 = () => {
             </div>
           ))}
         </div>
-        <button onClick={showResult} className={styles.showResultButton}>
+        {/* <button onClick={showResult} className={styles.showResultButton}>
           Ответы
         </button>
         {showResults && (
@@ -298,7 +300,7 @@ const Game1 = () => {
               {musicSing1.questions.length}. Идём дальше!
             </h2>
           </div>
-        )}
+        )} */}
         <h2 className={styles.titleSection}>Какой танец?</h2>
         <div className={styles.quizContainer}>
           {musicDance1.questions.map((question) => (
@@ -343,7 +345,8 @@ const Game1 = () => {
         {showResults && (
           <div className={styles.results}>
             <h2>
-              Молодцы! {calculateResults()} из {musicSing1.questions.length}.
+              Молодцы! {calculateResults()} из{" "}
+              {musicDance1.questions.length + musicSing1.questions.length}.
             </h2>
           </div>
         )}
