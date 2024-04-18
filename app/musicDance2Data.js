@@ -9,13 +9,13 @@ export const musicDance2 = {
     {
       id: 2,
       audio_file: "/music/arabskii.mp3",
-      images: ["/images/16.jpg", "/images/1.jpg", "/images/12.jpg"],
+      images: ["/images/16.jpg", "/images/11.jpg", "/images/12.jpg"],
       correctAnswer: "/images/16.jpg",
     },
     {
       id: 3,
       audio_file: "/music/lezginka.mp3",
-      images: ["/images/10.jpg", "/images/14.jpg", "/images/17.jpg"],
+      images: ["/images/16.jpg", "/images/14.jpg", "/images/17.jpg"],
       correctAnswer: "/images/17.jpg",
     },
   ],

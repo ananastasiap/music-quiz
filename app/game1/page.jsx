@@ -290,17 +290,6 @@ const Game1 = () => {
             </div>
           ))}
         </div>
-        {/* <button onClick={showResult} className={styles.showResultButton}>
-          Ответы
-        </button>
-        {showResults && (
-          <div className={styles.results}>
-            <h2>
-              Молодцы! Вы заработали {calculateResults()} из{" "}
-              {musicSing1.questions.length}. Идём дальше!
-            </h2>
-          </div>
-        )} */}
         <h2 className={styles.titleSection}>Какой танец?</h2>
         <div className={styles.quizContainer}>
           {musicDance1.questions.map((question) => (

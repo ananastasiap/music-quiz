@@ -7,7 +7,11 @@
   font-family: "Caveat", cursive;
 
   .container {
-    padding: 40px 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
     border-radius: 10px;
     background-color: #fff;
     position: relative;
@@ -61,11 +65,23 @@
   padding: 10px 15px;
 }
 
+.containerQuiz {
+  margin-top: 10vh;
+}
+
 .quizContainer {
   max-width: 70vw;
 
   .questionContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     max-width: 100%;
+
+    .audio {
+      margin-top: 5vh;
+    }
 
     .imageContainer {
       display: flex;
@@ -73,9 +89,10 @@
       justify-content: center;
       align-items: center;
       gap: 10px;
+      margin-top: 3vh;
 
       .image {
-        max-width: 30%;
+        max-width: 33%;
 
         img {
           width: 100%;
@@ -90,4 +107,23 @@
       background-color: red;
     }
   }
+}
+
+.titleSection {
+  margin-top: 5vh;
+  font-size: 2rem;
+}
+
+.showResultButton {
+  padding: 8px 8px;
+  width: 30%;
+}
+
+.exit {
+  margin-top: 5vh;
+  border: 2px solid #fff;
+  padding: 5px;
+  color: #fff;
+  font-size: 2rem;
+  border-radius: 5px;
 }

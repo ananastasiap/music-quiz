@@ -1,7 +1,9 @@
 "use client";
 import { useState, useEffect } from "react";
-import styles from "./page.module.scss";
 import Link from "next/link";
+import { musicSing2 } from "../musicSing2Data.js";
+import { musicDance2 } from "../musicDance2Data.js";
+import styles from "./page.module.scss";
 
 const Game2 = () => {
   const [selectedCells, setSelectedCells] = useState([]);
@@ -112,6 +114,32 @@ const Game2 = () => {
       }
     }
   }, [selectedCells]);
+
+  const [selectedAnswers, setSelectedAnswers] = useState({});
+  const [showResults, setShowResults] = useState(false);
+
+  const allQuestions = [...musicSing2.questions, ...musicDance2.questions];
+
+  const handleAnswerClick = (questionId, selectedOption) => {
+    setSelectedAnswers((prev) => ({
+      ...prev,
+      [questionId]: selectedOption,
+    }));
+  };
+
+  const calculateResults = () => {
+    let correctCount = 0;
+    allQuestions.forEach((question) => {
+      if (selectedAnswers[question.id] === question.correctAnswer) {
+        correctCount++;
+      }
+    });
+    return correctCount;
+  };
+
+  const showResult = () => {
+    setShowResults(true);
+  };
 
   return (
     <main className={styles.main}>
@@ -229,7 +257,99 @@ const Game2 = () => {
         {correctPair && <p className={styles.right}>Правильно!</p>}
         {wrongPair && <p className={styles.wrong}>Неправильно!</p>}
       </div>
-      <Link href="../games/">Выход</Link>
+
+      <div className={`${styles.container} ${styles.containerQuiz}`}>
+        <h2 className={styles.titleSection}>Кто поёт?</h2>
+        <div className={styles.quizContainer}>
+          {musicSing2.questions.map((question) => (
+            <div key={question.id} className={styles.questionContainer}>
+              <audio
+                controls
+                src={question.audio_file}
+                className={styles.audio}
+              />
+              <div className={styles.imageContainer}>
+                {question.images.map((image, index) => (
+                  <div
+                    key={index}
+                    className={`${styles.image} ${
+                      selectedAnswers[question.id] === image && styles.selected
+                    } ${
+                      showResults &&
+                      image === question.correctAnswer &&
+                      styles.correct
+                    } ${
+                      showResults &&
+                      image !== question.correctAnswer &&
+                      selectedAnswers[question.id] === image &&
+                      styles.incorrect
+                    }`}
+                    onClick={() => handleAnswerClick(question.id, image)}
+                  >
+                    <img
+                      src={image}
+                      alt={`Option ${index + 1}`}
+                      loading="lazy"
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+        <h2 className={styles.titleSection}>Какой танец?</h2>
+        <div className={styles.quizContainer}>
+          {musicDance2.questions.map((question) => (
+            <div key={question.id} className={styles.questionContainer}>
+              <audio
+                controls
+                src={question.audio_file}
+                className={styles.audio}
+              />
+              <div className={styles.imageContainer}>
+                {question.images.map((image, index) => (
+                  <div
+                    key={index}
+                    className={`${styles.image} ${
+                      selectedAnswers[question.id] === image && styles.selected
+                    } ${
+                      showResults &&
+                      image === question.correctAnswer &&
+                      styles.correct
+                    } ${
+                      showResults &&
+                      image !== question.correctAnswer &&
+                      selectedAnswers[question.id] === image &&
+                      styles.incorrect
+                    }`}
+                    onClick={() => handleAnswerClick(question.id, image)}
+                  >
+                    <img
+                      src={image}
+                      alt={`Option ${index + 1}`}
+                      loading="lazy"
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+        <button onClick={showResult} className={styles.showResultButton}>
+          Ответы
+        </button>
+        {showResults && (
+          <div className={styles.results}>
+            <h2>
+              Молодцы! {calculateResults()} из{" "}
+              {musicDance2.questions.length + musicSing2.questions.length}.
+            </h2>
+          </div>
+        )}
+      </div>
+      <Link href="../games/" className={styles.exit}>
+        Выйти
+      </Link>
     </main>
   );
 };
