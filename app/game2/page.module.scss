@@ -83,6 +83,15 @@
       margin-top: 5vh;
     }
 
+    .audio::-webkit-media-controls-panel {
+      background-color: #f29559;
+    }
+
+    .audio::-webkit-media-controls-play-button {
+      background-color: #fff;
+      border-radius: 50%;
+    }
+
     .imageContainer {
       display: flex;
       flex-direction: row;
@@ -101,10 +110,10 @@
     }
 
     .correct {
-      background-color: green;
+      background-color: #aaf5aa;
     }
     .incorrect {
-      background-color: red;
+      background-color: #f5aaaa;
     }
   }
 }
@@ -126,4 +135,9 @@
   color: #fff;
   font-size: 2rem;
   border-radius: 5px;
+  transition: all 0.5s ease-in-out;
+
+  &:hover {
+    transform: scale(1.3);
+  }
 }
