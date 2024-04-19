@@ -103,47 +103,5 @@ export const quiz = {
       ],
       correctAnswer: ["оперы", "симфонические произведения", "романсы и песни"],
     },
-    {
-      id: 12,
-      question: "Пыеор",
-      answers: ["верно", "неверно"],
-      correctAnswer: ["верно"],
-    },
-    {
-      id: 13,
-      question: "Финскиоемичсе ртюевыур",
-      answers: ["верно", "неверно"],
-      correctAnswer: ["верно"],
-    },
-    {
-      id: 14,
-      question: "Сораынм",
-      answers: ["верно", "неверно"],
-      correctAnswer: ["верно"],
-    },
-    {
-      id: 15,
-      question: "Енспи",
-      answers: ["верно", "неверно"],
-      correctAnswer: ["верно"],
-    },
-    {
-      id: 16,
-      question: "Фонрапиентеы мютиниары",
-      answers: ["верно", "неверно"],
-      correctAnswer: ["верно"],
-    },
-    {
-      id: 17,
-      question: "Летратеьная ыкумаз",
-      answers: ["верно", "неверно"],
-      correctAnswer: ["верно"],
-    },
-    {
-      id: 18,
-      question: "Охры",
-      answers: ["верно", "неверно"],
-      correctAnswer: ["верно"],
-    },
   ],
 };

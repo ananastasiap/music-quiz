@@ -7,6 +7,7 @@ import Header from "../components/Header";
 import { Fragment, useState } from "react";
 
 import styles from "./page.module.scss";
+import Link from "next/link.js";
 
 const StartMenu = () => {
   const [selectedQuiz, setSelectedQuiz] = useState(null);
@@ -31,6 +32,7 @@ const StartMenu = () => {
               <button onClick={() => handleQuizSelect("composer")}>
                 Композитор
               </button>
+              <Link href="../quizGenre/">Жанры творчества</Link>
               <button onClick={() => handleQuizSelect("opera1")}>
                 Опера «Иван Сусанин»
               </button>
