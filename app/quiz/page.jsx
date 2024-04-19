@@ -83,6 +83,10 @@ const Page = ({ data }) => {
     window.location.reload();
   };
 
+  const totalCorrectAnswers = questions.reduce((total, question) => {
+    return total + question.correctAnswer.length;
+  }, 0);
+
   return (
     <div className="container">
       <h1>{data.title}</h1>
@@ -131,8 +135,7 @@ const Page = ({ data }) => {
           <div className="quiz-container">
             <h3>Баллы</h3>
             <h3>
-              {result.score} из{" "}
-              {questions.length * questions[0].correctAnswer.length}
+              {result.score} из {totalCorrectAnswers}
             </h3>
             <button onClick={handleExit}>Выход</button>
           </div>
