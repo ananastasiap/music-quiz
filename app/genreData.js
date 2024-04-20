@@ -3,37 +3,37 @@ export const genreData = {
   questions: [
     {
       id: 1,
-      question: "Пыеор",
+      question: "пыеор",
       correctAnswer: ["оперы"],
     },
     {
       id: 2,
-      question: "Финскиоемичсе ртюевыур",
+      question: "финскиоемичсе ртюевыур",
       correctAnswer: ["симфонические увертюры"],
     },
     {
       id: 3,
-      question: "Сораынм",
+      question: "сораынм",
       correctAnswer: ["романсы"],
     },
     {
       id: 4,
-      question: "Енспи",
+      question: "енспи",
       correctAnswer: ["песни"],
     },
     {
       id: 5,
-      question: "Фонрапиентеы мютиниары",
+      question: "фонрапиентеы мютиниары",
       correctAnswer: ["фортепианные миниатюры"],
     },
     {
       id: 6,
-      question: "Летратеьная ыкумаз",
+      question: "летратеьная ыкумаз",
       correctAnswer: ["театральная музыка"],
     },
     {
       id: 7,
-      question: "Охры",
+      question: "охры",
       correctAnswer: ["хоры"],
     },
   ],

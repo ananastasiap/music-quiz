@@ -32,7 +32,9 @@ const StartMenu = () => {
               <button onClick={() => handleQuizSelect("composer")}>
                 Композитор
               </button>
-              <Link href="../quizGenre/">Жанры творчества</Link>
+              <Link className={styles.likeBtn} href="../quizGenre/">
+                Жанры творчества
+              </Link>
               <button onClick={() => handleQuizSelect("opera1")}>
                 Опера «Иван Сусанин»
               </button>

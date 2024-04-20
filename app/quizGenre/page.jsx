@@ -11,7 +11,7 @@ const Page = () => {
       <Header />
       <main>
         <div>
-          <h2>{genreData.title}</h2>
+          <h2 className={styles.titleGenre}>{genreData.title}</h2>
           <div className={styles.cards}>
             {genreData.questions.map((question) => (
               <Card
