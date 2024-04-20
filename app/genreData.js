@@ -1,4 +1,5 @@
 export const genreData = {
+  title: "Жанры творчества",
   questions: [
     {
       id: 1,
