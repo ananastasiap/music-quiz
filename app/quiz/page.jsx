@@ -15,7 +15,6 @@ const Page = ({ data }) => {
     correctAnswers: 0,
     wrongAnswers: 0,
   });
-  const [isAnswerCorrect, setIsAnswerCorrect] = useState(null);
   const [showCheckButton, setShowCheckButton] = useState(true);
   const [answerFeedback, setAnswerFeedback] = useState([]);
   const [isAnswerChecked, setIsAnswerChecked] = useState(false);
@@ -28,10 +27,11 @@ const Page = ({ data }) => {
       return;
     }
 
-    const newSelectedAnswerIndexes = [...selectedAnswerIndexes, answerIndex];
+    const newSelectedAnswerIndexes = selectedAnswerIndexes.includes(answerIndex)
+      ? selectedAnswerIndexes.filter((index) => index !== answerIndex)
+      : [...selectedAnswerIndexes, answerIndex];
 
     setSelectedAnswerIndexes(newSelectedAnswerIndexes);
-    setIsAnswerCorrect(null);
   };
 
   const checkAnswers = () => {
@@ -45,19 +45,18 @@ const Page = ({ data }) => {
 
     setAnswerFeedback(answerFeedback);
 
-    const selectedCorrectIndexes = selectedAnswerIndexes.filter((index) =>
-      correctAnswer.includes(answers[index])
-    );
+    const score = selectedAnswerIndexes.reduce((total, index) => {
+      const isCorrect = correctAnswer.includes(answers[index]);
+      return total + (isCorrect ? 1 : 0);
+    }, 0);
 
     setResult((prevResult) => ({
       ...prevResult,
-      score: prevResult.score + selectedCorrectIndexes.length,
-      correctAnswers: prevResult.correctAnswers + selectedCorrectIndexes.length,
+      score: prevResult.score + score,
+      correctAnswers: prevResult.correctAnswers + score,
       wrongAnswers:
         prevResult.wrongAnswers +
-        (selectedCorrectIndexes.length === selectedAnswerIndexes.length
-          ? 0
-          : 1),
+        (score === selectedAnswerIndexes.length ? 0 : 1),
     }));
 
     setShowCheckButton(false);
@@ -75,7 +74,6 @@ const Page = ({ data }) => {
       setShowResult(true);
     }
     setSelectedAnswerIndexes([]);
-    setIsAnswerCorrect(null);
     setAnswerFeedback([]);
   };
 
@@ -109,9 +107,13 @@ const Page = ({ data }) => {
                     ? "li-selected"
                     : "li-hover"
                 } ${
+                  isAnswerChecked &&
+                  selectedAnswerIndexes.includes(idx) &&
                   answerFeedback[idx]?.isCorrect
                     ? "li-correct"
-                    : answerFeedback[idx]?.isCorrect === false
+                    : isAnswerChecked &&
+                      selectedAnswerIndexes.includes(idx) &&
+                      answerFeedback[idx]?.isCorrect === false
                     ? "li-incorrect"
                     : ""
                 }`}
