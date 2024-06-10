@@ -1,36 +1,23 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Квиз "Контрольный урок по творчеству М.И.Глинки"
 
-## Getting Started
+Проект подготовлен для урока Краснодарского музыкального колледжа им.Николая Андреевича Римского-Корсакова.
 
-First, run the development server:
+## Лауреат III степени в номинации "ОБУЧАЮЩИЙ РЕСУРС"
+
+Международный онлайн конкурс мультимедийных проектов в области музыкального искусства для детских музыкальных школ и школ искусств, студентов музыкальных колледжей и вузов (МГИМ им. А.Г. Шнитке)
+
+Результаты: https://schnittke-mgim.ru/ArtProjects/konkursy-olimpiady/multimedia-2024/?ysclid=lx8pixm65u517567364
+
+## Установка
 
 ```bash
-npm run dev
+npm i
 # or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+yarn
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Скрипты
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- `dev`/`start` - start dev server and open browser
+- `build` - build for production
+- `lint` - lint project code
